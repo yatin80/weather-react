@@ -122,7 +122,7 @@ body {
 
 .other-details-item .other-details-item-label {
   background-color: rgba(255, 255, 255, 0.30);
-  padding: 8px 20px;
+  padding: 9px 20px 6px;
   border-radius: 18px;
   color: white;
   font-size: 18px;
@@ -234,7 +234,7 @@ body {
 }
 
 .carousel .control-dots {
-  bottom: -12px;
+  bottom: -11px !important;
 }
 
 /* .carousel-root .slider .slide {
