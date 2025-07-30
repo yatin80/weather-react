@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
+import {BASE_URL} from './../constancs/ApiConstancs';
+
 function Forcast(props) {
     const [forCastData, setForCastData] = useState(null);
 
     useEffect(() => {
         const fetchForCastData = async () => {
             try {
-                const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=63959549db7e4b01b7562618252407&q=${props.city}&days=7&aqi=no&alerts=no`);
+                const response = await fetch(`${BASE_URL}${props.city}&days=7&aqi=no&alerts=no`);
                 const data = await response.json();
                 setForCastData(data);
             } catch (error) {

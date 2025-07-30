@@ -1,0 +1,1 @@
+export const BASE_URL = "https://api.weatherapi.com/v1/forecast.json?key=63959549db7e4b01b7562618252407&q=";

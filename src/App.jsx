@@ -9,19 +9,24 @@ import Card from './components/Card'
 import Button from './components/Button'
 import Forcast from './components/Forcast';
 
+import {BASE_URL} from './constancs/ApiConstancs'
+
 function App() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [inputValue, setInputValue] = useState("");
   
-  const baseUrl = "https://api.weatherapi.com/v1/current.json?key=63959549db7e4b01b7562618252407"
+  // const baseUrl = "https://api.weatherapi.com/v1/current.json?key=63959549db7e4b01b7562618252407"
+  // const baseUrl = "https://api.weatherapi.com/v1/forecast.json?key=63959549db7e4b01b7562618252407&q=";
+
+  // https://api.weatherapi.com/v1/forecast.json?key=63959549db7e4b01b7562618252407&q=${props.city}&days=7&aqi=no&alerts=no
 
  
   
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${baseUrl}&q=${city}&aqi=no`);
+      const response = await fetch(`${BASE_URL}${city}&days=7&aqi=no&alerts=no`);
       const data = await response.json();
       // console.log(data);
       setWeatherData(data);
