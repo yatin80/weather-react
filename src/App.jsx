@@ -9,20 +9,21 @@ import Card from './components/Card'
 import Button from './components/Button'
 import Forcast from './components/Forcast';
 
-import {BASE_URL} from './constancs/ApiConstancs'
+import { BASE_URL } from './constancs/ApiConstancs'
+import WeatherDetails from './components/WeatherDetails';
 
 function App() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [inputValue, setInputValue] = useState("");
-  
+
   // const baseUrl = "https://api.weatherapi.com/v1/current.json?key=63959549db7e4b01b7562618252407"
   // const baseUrl = "https://api.weatherapi.com/v1/forecast.json?key=63959549db7e4b01b7562618252407&q=";
 
   // https://api.weatherapi.com/v1/forecast.json?key=63959549db7e4b01b7562618252407&q=${props.city}&days=7&aqi=no&alerts=no
 
- 
-  
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,13 +71,13 @@ function App() {
   return (
     <>
       <div className='container vh-100'>
-        <div className='content-container d-flex flex-column align-items-center justify-content-between vh-100'>
+        <div className='content-container d-flex flex-column align-items-center justify-content-start vh-100'>
           {/* <h1 className='bg-red'>Weather Applicatin</h1> */}
           <div className='city-search-input py-2 px-2 rounded-5 d-flex justify-content-between align-items-center gap-2'>
             <Input
               placeholder="Enter city here"
               onChange={(e) => setInputValue(e.target.value)}
-              className="flex-grow-1 bg-transparent text-white"
+              className="flex-grow-1 bg-transparent text-white border-0"
             />
             <div className='btn-search rounded-5'>
               <Button
@@ -87,30 +88,39 @@ function App() {
             </div>
 
           </div>
-          <div>
+          <div className='w-100'>
             {/* {
           weatherData && weatherData.error ? (
             <h2 className='error'>City not found</h2>
           ) : null
         } */}
-          {city || !weatherData ? (
-            <Card
-              searchCity={weatherData?.location?.name}
-              searchState={weatherData?.location?.region}
-              searchCountry={weatherData?.location?.country}
-              currentTem={weatherData?.current?.temp_c}
-              weatherIcon={weatherData?.current?.condition?.icon}
+            {city || !weatherData ? (
+              <Card
+                searchCity={weatherData?.location?.name}
+                searchState={weatherData?.location?.region}
+                searchCountry={weatherData?.location?.country}
+                currentTem={weatherData?.current?.temp_c}
+                weatherIcon={weatherData?.current?.condition?.icon}
+                weatherText={weatherData?.current?.condition?.text}
+              // lastUpdate={weatherData?.current?.last_updated}
+              // humidity={weatherData?.current?.humidity}
+              // wind={weatherData?.current?.wind_kph}
+              // pressure={weatherData?.current?.pressure_mb}
+              // uvIndex={weatherData?.current?.uv}
+              />
+            ) : (
+              <h2 className='error'>Please enter a city to get weather data</h2>
+            )}
+            <WeatherDetails
               lastUpdate={weatherData?.current?.last_updated}
               humidity={weatherData?.current?.humidity}
               wind={weatherData?.current?.wind_kph}
-              weatherText={weatherData?.current?.condition?.text}
+              pressure={weatherData?.current?.pressure_mb}
+              uvIndex={weatherData?.current?.uv}
             />
-          ) : (
-            <h2 className='error'>Please enter a city to get weather data</h2>
-          )}
-          {/* <Button name="Refresh" clickHandler={handleRefresh} /> */}
+            {/* <Button name="Refresh" clickHandler={handleRefresh} /> */}
+            <Forcast city={city} />
           </div>
-          <Forcast city={city} />
         </div>
       </div>
     </>

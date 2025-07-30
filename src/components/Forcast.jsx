@@ -39,7 +39,7 @@ function Forcast(props) {
     }
 
     return (
-        <div className='border-top border-bottom py-4 mt-3 fw-normal mb-4'>
+        <div className='border-top border-bottom py-4 fw-normal mb-4'>
             <Carousel
                 selectedItem={0}  
                 showIndicators={true}

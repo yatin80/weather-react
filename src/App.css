@@ -18,12 +18,13 @@ body {
   min-height: 100vh;
   background-image: linear-gradient(to bottom, #fc7e77 0%, #c2bab3 100%);
   overflow-x: hidden;
+  letter-spacing: 0.5px;
 }
 
 .content-container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 16px 0;
   color: white;
   /* background-color: white;
   border-radius: 15px;
@@ -73,9 +74,9 @@ body {
 
 .city-temp-details {
   display: flex;
-  align-items: center;
-  margin-top: 20px;
-  justify-content: space-between;
+  margin-top: 35px;
+  margin-bottom: 25px;
+  justify-content: center;
   align-items: flex-start;
 }
 
@@ -87,49 +88,56 @@ body {
   align-items: flex-start;
 }
 
-.city-temp-details .temp .temp-icon {
+.city-temp-details .temp-icon {
   /* border: 2px solid white; */
   display: inline-block;
-  padding-top: 15px;
-  margin-left: -15px;
+  margin-right: 25px;
+  margin-top: -15px;
+
 }
 
-.city-temp-details .temp .temp-icon img {
-  width: 90px;
+.city-temp-details .temp-icon img {
+  width: 100px;
 }
 
 .city-temp-details .temp .temp-unit {
   font-size: 72px;
 }
 
-.city-other-details {}
+.city-other-details {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
 .city-other-details .other-details-item {
   display: flex;
-  align-items: end;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 35px;
+  width: 50%;
+
 }
 
 .other-details-item .other-details-item-label {
-  background-color: rgba(255, 255, 255, 0.35);
-  padding: 5px 12px;
+  background-color: rgba(255, 255, 255, 0.30);
+  padding: 8px 20px;
   border-radius: 18px;
   color: white;
-  font-size: 12px;
-  letter-spacing: 0.4px;
-  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 300;
 }
 
 .other-details-item .other-details-item-value {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 500;
   color: white;
 }
 
 .weather-text {
-  font-size: 64px;
+  font-size: 26px;
   font-weight: 300;
   word-break: break-word;
   max-width: 70%;
@@ -223,6 +231,10 @@ body {
 .carousel-root {
   width: 100%;
   height: 100%;
+}
+
+.carousel .control-dots {
+  bottom: -12px;
 }
 
 /* .carousel-root .slider .slide {
