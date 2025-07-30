@@ -7,18 +7,23 @@ import Input from './components/Input'
 
 import Card from './components/Card'
 import Button from './components/Button'
+import Forcast from './components/Forcast';
 
 function App() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [inputValue, setInputValue] = useState("");
+  
   const baseUrl = "https://api.weatherapi.com/v1/current.json?key=63959549db7e4b01b7562618252407"
+
+ 
+  
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`${baseUrl}&q=${city}&aqi=no`);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setWeatherData(data);
     }
 
@@ -33,7 +38,7 @@ function App() {
 
   }
 
-  console.log("input value", inputValue);
+  // console.log("input value", inputValue);
 
   const handleRefresh = (e) => {
     e.preventDefault();
@@ -44,7 +49,7 @@ function App() {
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log("position", position);
+      // console.log("position", position);
       const { latitude, longitude } = position.coords;
       setCity(`${latitude},${longitude}`);
 
@@ -59,8 +64,8 @@ function App() {
 
   return (
     <>
-      <div className='container'>
-        <div className='content-container'>
+      <div className='container vh-100'>
+        <div className='content-container d-flex flex-column align-items-center justify-content-between vh-100'>
           {/* <h1 className='bg-red'>Weather Applicatin</h1> */}
           <div className='city-search-input py-2 px-2 rounded-5 d-flex justify-content-between align-items-center gap-2'>
             <Input
@@ -77,7 +82,8 @@ function App() {
             </div>
 
           </div>
-          {/* {
+          <div>
+            {/* {
           weatherData && weatherData.error ? (
             <h2 className='error'>City not found</h2>
           ) : null
@@ -98,6 +104,8 @@ function App() {
             <h2 className='error'>Please enter a city to get weather data</h2>
           )}
           {/* <Button name="Refresh" clickHandler={handleRefresh} /> */}
+          </div>
+          <Forcast city={city} />
         </div>
       </div>
     </>

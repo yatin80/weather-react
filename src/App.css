@@ -1,6 +1,8 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
+body{
+  overflow-x: hidden;
+}
 #root {
   font-family: 'Roboto', 'Segoe UI', sans-serif;
   font-size: 16px;
@@ -11,8 +13,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-image: linear-gradient(to bottom, #fc7e77 0%, #c2bab3 100%);
+  overflow-x: hidden;
 }
 
 .content-container {
@@ -32,11 +35,13 @@
   background-color: rgba(255, 255, 255, 0.45);
   margin-bottom: 30px;
 }
-.city-search-input .btn-search{
+
+.city-search-input .btn-search {
   background-color: rgba(255, 255, 255, 0.45);
-  
+
 }
-.btn-search .btn{
+
+.btn-search .btn {
   color: #fc7e77;
 }
 
@@ -84,7 +89,8 @@
   padding-top: 15px;
   margin-left: -15px;
 }
-.city-temp-details .temp .temp-icon img{
+
+.city-temp-details .temp .temp-icon img {
   width: 90px;
 }
 
@@ -119,7 +125,7 @@
 }
 
 .weather-text {
-  font-size: 80px;
+  font-size: 64px;
   font-weight: 300;
   word-break: break-word;
   max-width: 70%;
@@ -208,4 +214,14 @@
   position: absolute;
   right: 10px;
   top: 3px;
+} */
+
+.carousel-root {
+  width: 100%;
+  height: 100%;
+}
+
+/* .carousel-root .slider .slide {
+  width: 50%;
+  min-width: 50% !important;
 } */
