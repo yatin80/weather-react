@@ -21,7 +21,7 @@ function Forcast(props) {
         fetchForCastData();
     }, [props.city]);
 
-    console.log("forecast data", forCastData);
+    // console.log("forecast data", forCastData);
 
     const forecastDays = forCastData?.forecast?.forecastday || [];
 
