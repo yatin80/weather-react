@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
 
-import {BASE_URL} from './../constancs/ApiConstancs';
+import { BASE_URL } from './../constancs/ApiConstancs';
+import useEmblaCarousel from 'embla-carousel-react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Forcast(props) {
-    const [forCastData, setForCastData] = useState(null);
+    const { forCastData, setForCastData } = props;
+    const [emblaRef] = useEmblaCarousel({ loop: false });
+    const param = useParams();
 
-    useEffect(() => {
-        const fetchForCastData = async () => {
-            try {
-                const response = await fetch(`${BASE_URL}${props.city}&days=7&aqi=no&alerts=no`);
-                const data = await response.json();
-                setForCastData(data);
-            } catch (error) {
-                console.log("Error fetching forecast data:", error);
+    const navigate = useNavigate();
 
-            }
-        };
-        fetchForCastData();
-    }, [props.city]);
+
+
+    // useEffect(() => {
+    //     const fetchForCastData = async () => {
+    //         try {
+    //             const response = await fetch(`${BASE_URL}${props.city}&days=7&aqi=no&alerts=no`);
+    //             const data = await response.json();
+    //             setForCastData(data);
+    //         } catch (error) {
+    //             console.log("Error fetching forecast data:", error);
+
+    //         }
+    //     };
+    //     fetchForCastData();
+    // }, [props.city]);
 
     // console.log("forecast data", forCastData);
 
@@ -38,10 +45,45 @@ function Forcast(props) {
         groupedForecasts.push(forecastDays.slice(i, i + 2));
     }
 
+    const goToDayPage = (day) => {
+        // navigation(`/forecast/${forCastData.location.name}/${forCastData.location.localtime.split(' ')[0]}`);
+        navigate(`/forecast/${day.date}`, { state: { dayData: day } });
+
+    }
+
     return (
         <div className='border-top border-bottom py-4 fw-normal mb-4'>
-            <Carousel
-                selectedItem={0}  
+
+            <section className="embla">
+                <div className="embla__viewport" ref={emblaRef}>
+                    <div className="embla__container">
+                        {groupedForecasts.map((group, index) => (
+                            <div key={index} className='embla__slide  d-flex justify-content-center gap-4'>
+                                {group.map((day, idx) => (
+                                    <div key={idx}
+                                        className='forecast-slide rounded-3 p-3 text-center'
+                                        style={{ minWidth: '150px' }}
+                                        onClick={() => goToDayPage(day)}
+                                    >
+                                        <h5>{getDayName(day.date)}</h5>
+                                        {/* <div>{day.date}</div> */}
+                                        <div className='text-center mb-2'>
+                                            <img src={day.day.condition.icon} alt={day.day.condition.text}
+                                                style={{ width: '50px' }} />
+                                        </div>
+                                        <div>Max: {day.day.maxtemp_c}°C</div>
+                                        <div>Min: {day.day.mintemp_c}°C</div>
+                                        <div>{day.day.condition.text}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* <Carousel
+                selectedItem={0}
                 showIndicators={true}
                 showStatus={false}
                 showThumbs={false}
@@ -50,14 +92,14 @@ function Forcast(props) {
                 showArrows={false}
                 interval={4000}
                 transitionTime={600}
-                
+
             >
                 {groupedForecasts.map((group, index) => (
                     <div key={index} className='d-flex justify-content-center gap-4'>
                         {group.map((day, idx) => (
                             <div key={idx} className='border rounded-3 p-3 text-center' style={{ minWidth: '150px' }}>
                                 <h5>{getDayName(day.date)}</h5>
-                                {/* <div>{day.date}</div> */}
+                                
                                 <div className='text-center mb-2'>
                                     <img src={day.day.condition.icon} alt={day.day.condition.text}
                                         style={{ width: '50px' }} />
@@ -69,7 +111,7 @@ function Forcast(props) {
                         ))}
                     </div>
                 ))}
-            </Carousel>
+            </Carousel> */}
         </div>
     );
 }

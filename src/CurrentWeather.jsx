@@ -32,7 +32,7 @@ function CurrentWeather(props) {
 
         fetchData();
     }, [city]);
-    // console.log("weather data", weatherData);
+    console.log("weather data", weatherData);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -119,7 +119,10 @@ function CurrentWeather(props) {
                             city={city}
                             hourData={weatherData}
                         />
-                        <Forcast city={city} />
+                        <Forcast
+                            city={city}
+                            forCastData={weatherData}
+                        />
                     </div>
                 </div>
             </div>
