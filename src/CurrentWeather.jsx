@@ -51,12 +51,18 @@ function CurrentWeather(props) {
     }
 
     const getCurrentLocation = () => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            // console.log("position", position);
-            const { latitude, longitude } = position.coords;
-            setCity(`${latitude},${longitude}`);
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                // console.log("position", position);
+                const { latitude, longitude } = position.coords;
+                setCity(`${latitude},${longitude}`);
 
-        })
+            })
+        } else {
+            // Geolocation is not available
+            alert("Geolocation is not available Please enable your Location");
+        }
+
 
     }
 
