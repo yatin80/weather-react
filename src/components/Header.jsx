@@ -6,7 +6,7 @@ function Header(props) {
             <button className='btn btn-link text-white' onClick={props.handleSidebarToggle}>
                 <i className="bi bi-list fs-1"></i>
             </button>
-            <h1 className='fw-normal mb-0 text-white fs-4 me-3'>Weather App</h1>
+            <h1 className='fw-normal mb-0 text-white fs-4 me-3'>Weather</h1>
             {/* <button className='btn btn-outline-secondary' onClick={props.handleSearch}>
                 <i class="bi bi-search"></i>
             </button> */}
