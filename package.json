@@ -1,13 +1,11 @@
 {
-  "homepage": "https://yatin80.github.io/weather-react",
   "name": "weather-react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

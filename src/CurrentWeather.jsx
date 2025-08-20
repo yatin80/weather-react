@@ -19,36 +19,32 @@ function CurrentWeather(props) {
 
     // https://api.weatherapi.com/v1/forecast.json?key=63959549db7e4b01b7562618252407&q=${props.city}&days=7&aqi=no&alerts=no
 
+    const fetchData = async () => {
+        if (!city) return;
+        // console.log("Fetching data for city:", city);
 
-
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(`${BASE_URL}${city}&days=7&aqi=no&alerts=no`);
+        try {
+            const response = await fetch(`${BASE_URL}${city}&days=7&aqi=no&alerts=yes`);
             const data = await response.json();
             // console.log(data);
             setWeatherData(data);
+        } catch (error) {
+            console.error("Error fetching weather data:", error);
+            setWeatherData(null);
         }
 
-        fetchData();
+    }
+
+
+    useEffect(() => {
+        if (city) {
+            fetchData(city);
+            localStorage.setItem("city", city)
+        }
     }, [city]);
+
     console.log("weather data", weatherData);
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        setCity(inputValue);
-        setInputValue("");
-
-    }
-
-    // console.log("input value", inputValue);
-
-    const handleRefresh = (e) => {
-        e.preventDefault();
-        setCity("");
-        setWeatherData(null);
-        setInputValue("");
-    }
 
     const getCurrentLocation = () => {
         if ("geolocation" in navigator) {
@@ -67,8 +63,34 @@ function CurrentWeather(props) {
     }
 
     useEffect(() => {
-        getCurrentLocation();
+        const saveCity = localStorage.getItem("city");
+        if (saveCity) {
+            setCity(saveCity);
+        } else {
+            getCurrentLocation();
+        }
     }, []);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        setCity(inputValue);
+        localStorage.setItem("city", inputValue);
+        setInputValue("");
+
+    }
+
+    // console.log("input value", inputValue);
+
+    const handleRefresh = (e) => {
+        e.preventDefault();
+        setCity("");
+        setWeatherData(null);
+        setInputValue("");
+    }
+
+
+
+
 
     return (
         <>
@@ -96,7 +118,7 @@ function CurrentWeather(props) {
                     <h2 className='error'>City not found</h2>
                   ) : null
                 } */}
-                        {city || !weatherData ? (
+                        {city || weatherData ? (
                             <Card
                                 searchCity={weatherData?.location?.name}
                                 searchState={weatherData?.location?.region}
@@ -114,21 +136,29 @@ function CurrentWeather(props) {
                             <h2 className='error'>Please enter a city to get weather data</h2>
                         )}
 
-                        <CurrentWeatherDetails
-                            lastUpdate={weatherData?.current?.last_updated}
-                            humidity={weatherData?.current?.humidity}
-                            wind={weatherData?.current?.wind_kph}
-                            pressure={weatherData?.current?.pressure_mb}
-                            uvIndex={weatherData?.current?.uv}
-                        />
-                        <HourlyWeather
-                            city={city}
-                            hourData={weatherData}
-                        />
-                        <Forcast
-                            city={city}
-                            forCastData={weatherData}
-                        />
+                        {weatherData ? (
+                            <>
+
+                                <CurrentWeatherDetails
+                                    lastUpdate={weatherData?.current?.last_updated}
+                                    humidity={weatherData?.current?.humidity}
+                                    wind={weatherData?.current?.wind_kph}
+                                    pressure={weatherData?.current?.pressure_mb}
+                                    uvIndex={weatherData?.current?.uv}
+                                />
+                                <HourlyWeather
+                                    city={city}
+                                    hourData={weatherData}
+                                />
+                                <Forcast
+                                    city={city}
+                                    forCastData={weatherData}
+                                />
+                            </>
+                        ) : (
+                            <p className='text-white'>No data available</p>
+                        )}
+
                     </div>
                 </div>
             </div>

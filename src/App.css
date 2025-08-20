@@ -17,6 +17,7 @@ body {
   width: 100vw;
   min-height: 100vh;
   background-image: linear-gradient(to bottom, #fc7e77 0%, #c2bab3 100%);
+  background-image: linear-gradient(to bottom, #11134f 0%, #474ba1 100%);
   overflow-x: hidden;
   letter-spacing: 0.5px;
 }
