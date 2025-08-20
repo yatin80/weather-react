@@ -97,41 +97,38 @@ function CurrentWeather(props) {
                   ) : null
                 } */}
                         {city || !weatherData ? (
-                            <>
-                                <Card
-                                    searchCity={weatherData?.location?.name}
-                                    searchState={weatherData?.location?.region}
-                                    searchCountry={weatherData?.location?.country}
-                                    currentTem={weatherData?.current?.temp_c}
-                                    weatherIcon={weatherData?.current?.condition?.icon}
-                                    weatherText={weatherData?.current?.condition?.text}
-                                // lastUpdate={weatherData?.current?.last_updated}
-                                // humidity={weatherData?.current?.humidity}
-                                // wind={weatherData?.current?.wind_kph}
-                                // pressure={weatherData?.current?.pressure_mb}
-                                // uvIndex={weatherData?.current?.uv}
-                                />
-                                <CurrentWeatherDetails
-                                    lastUpdate={weatherData?.current?.last_updated}
-                                    humidity={weatherData?.current?.humidity}
-                                    wind={weatherData?.current?.wind_kph}
-                                    pressure={weatherData?.current?.pressure_mb}
-                                    uvIndex={weatherData?.current?.uv}
-                                />
-                                <HourlyWeather
-                                    city={city}
-                                    hourData={weatherData}
-                                />
-                                <Forcast
-                                    city={city}
-                                    forCastData={weatherData}
-                                />
-                            </>
+                            <Card
+                                searchCity={weatherData?.location?.name}
+                                searchState={weatherData?.location?.region}
+                                searchCountry={weatherData?.location?.country}
+                                currentTem={weatherData?.current?.temp_c}
+                                weatherIcon={weatherData?.current?.condition?.icon}
+                                weatherText={weatherData?.current?.condition?.text}
+                            // lastUpdate={weatherData?.current?.last_updated}
+                            // humidity={weatherData?.current?.humidity}
+                            // wind={weatherData?.current?.wind_kph}
+                            // pressure={weatherData?.current?.pressure_mb}
+                            // uvIndex={weatherData?.current?.uv}
+                            />
                         ) : (
-                            <h5 className='error'>Please enter a City or Locatio on and refresh to get weather data</h5>
+                            <h2 className='error'>Please enter a city to get weather data</h2>
                         )}
 
-
+                        <CurrentWeatherDetails
+                            lastUpdate={weatherData?.current?.last_updated}
+                            humidity={weatherData?.current?.humidity}
+                            wind={weatherData?.current?.wind_kph}
+                            pressure={weatherData?.current?.pressure_mb}
+                            uvIndex={weatherData?.current?.uv}
+                        />
+                        <HourlyWeather
+                            city={city}
+                            hourData={weatherData}
+                        />
+                        <Forcast
+                            city={city}
+                            forCastData={weatherData}
+                        />
                     </div>
                 </div>
             </div>
